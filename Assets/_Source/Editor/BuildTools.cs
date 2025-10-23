@@ -10,6 +10,7 @@ namespace _Source.Editor
     public class BuildTools
     {
         private const string BuildPathRoot = "Builds";
+        private const string WebGLTemplateName = "Better2020";
 
         [MenuItem("Build/Build All", priority = 0)]
         public static void BuildAll()
@@ -29,7 +30,10 @@ namespace _Source.Editor
         
         [MenuItem("Build/Build Android", priority = 2)]
         public static void BuildAndroid() => BuildForAndroid();
-
+        
+        [MenuItem("Build/Build WebGL", priority = 3)]
+        public static void BuildWebGL() => BuildForWebGL();
+        
         private static void BuildForPC()
         {
             var path = Path.Combine(BuildPathRoot, "PC");
@@ -66,6 +70,24 @@ namespace _Source.Editor
                 options = BuildOptions.None
             };
             BuildReportReport("Android", BuildPipeline.BuildPlayer(buildPlayerOptions));
+        }
+        private static void BuildForWebGL()
+        {
+            var path = Path.Combine(BuildPathRoot, "WebGL");
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
+            
+            PlayerSettings.WebGL.template = $"PROJECT:{WebGLTemplateName}";
+            var buildPlayerOptions = new BuildPlayerOptions
+            {
+                scenes = GetEnabledScenes(),
+                locationPathName = path,
+                target = BuildTarget.WebGL,
+                options = BuildOptions.None
+            };
+            BuildReportReport("WebGL", BuildPipeline.BuildPlayer(buildPlayerOptions));
         }
 
         private static string[] GetEnabledScenes()

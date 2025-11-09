@@ -1,7 +1,9 @@
-﻿namespace EcsJobs.Components
+﻿using Unity.Entities;
+
+namespace EcsJobs.Components
 {
-    public struct Angle
+    public struct Angle : IComponentData
     {
-        
+        public float Value;
     }
 }

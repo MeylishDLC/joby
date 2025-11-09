@@ -2,8 +2,8 @@
 
 namespace EcsJobs.Components
 {
-    public struct Radius: IComponentData
+    public struct SpawnedTag: IComponentData
     {
-        public float Value;
+        
     }
 }

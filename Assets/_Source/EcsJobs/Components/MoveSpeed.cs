@@ -1,7 +1,9 @@
-﻿namespace EcsJobs.Components
+﻿using Unity.Entities;
+
+namespace EcsJobs.Components
 {
-    public struct MoveSpeed
+    public struct MoveSpeed: IComponentData
     {
-        
+        public float Value;
     }
 }
